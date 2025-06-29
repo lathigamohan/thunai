@@ -1,0 +1,130 @@
+
+Build a personal finance web app named **Finla** using **Flask**, for a single user.
+
+✨ Goal: Help the user **track daily expenses**, categorize spending, manage UPI-linked bank accounts, and grow savings — all wrapped in a clean, mobile-friendly **dark mode** UI with daily motivational quotes in **Tamil and English**.
+
+---
+
+### 🧰 Tech Stack
+
+- Frontend: HTML, CSS, Bootstrap (Dark Mode), Chart.js  
+- Backend: Python + Flask  
+- Storage: JSON (bank info), CSV (transactions)  
+- Quotes: Tamil-English Thirukkural + Warren Buffett + AI quotes  
+- Hosting: Replit  
+- Bonus: PWA support (`manifest.json` + `service-worker.js`)  
+
+---
+
+### 📁 Folder Structure
+
+FINLA/
+├── app.py                    ← Flask main file
+├── requirements.txt          ← Python deps
+├── manifest.json             ← For PWA installability
+├── README.md                 ← Project summary
+
+├── templates/
+│   ├── index.html            ← Home page (daily quote, balance)
+│   ├── upload.html           ← Upload transactions
+│   ├── charts.html           ← Graphs and analytics
+│   └── add.html              ← Manual transaction input
+
+├── static/
+│   ├── style.css             ← Dark mode styling
+│   ├── scripts.js            ← Client-side logic
+│   └── service-worker.js     ← Makes PWA installable
+
+├── data/
+│   ├── banks.json            ← Bank info + UPI links
+│   └── transactions.csv      ← All daily expenses
+
+├── utils/
+│   ├── categorize.py         ← Smart category tagger
+│   └── finance.py            ← Balance calc, alerts
+
+---
+
+### 💸 Features
+
+#### 1. Bank Manager 🏦  
+- Add bank name, starting balance, **minimum alert balance**, and **linked UPI app** (user-defined).
+- Store this data in `data/banks.json`.
+
+#### 2. Manual Entry Mode ✍️  
+- Ask user:
+  - Amount
+  - Description
+  - Payment method (Bank or UPI app)
+- If UPI → lookup linked bank and deduct from it.
+- Categorize with `categorize.py`.
+- Save to `transactions.csv`.
+
+#### 3. CSV Upload Mode 📤  
+- Upload multiple entries and apply same logic.
+
+#### 4. Category AI 🎯  
+- `categorize.py` detects keywords:
+  - Food & Snacks 🍔  
+  - Juices 🧃  
+  - Transport 🚗  
+  - Education 📚  
+  - Others 🔘  
+
+#### 5. 50/30/20 Budget 💡  
+- Split spending into:
+  - 50% Needs
+  - 30% Wants
+  - 20% Investments
+
+#### 6. Daily Quote 💬  
+- Rotating quotes in Tamil + English.
+- Include:
+  - Thirukkural: 751, 753, 754
+  - Warren Buffett (3)
+  - AI quotes (4)
+
+#### 7. Balance Alerts 🚨  
+- When balance drops below min, warn the user.
+
+#### 8. Chart Dashboard 📊  
+- Daily bar + monthly pie chart (Chart.js)
+
+#### 9. Export Reports 📄  
+- Download CSV or generate summary (PDF)
+
+#### 10. PWA Experience 📱  
+- `manifest.json`, `service-worker.js`
+- Add to Home Screen
+
+---
+
+### 🔐 UPI Logic
+
+- UPI → linked bank set by user in `banks.json`
+- Don't hardcode GPay → Axis etc.
+
+---
+
+### 🧠 Smart UI
+
+- Minimalist, dark theme
+- Tamil + English fonts
+- Daily quote block on homepage
+- Mobile-responsive
+
+---
+
+### Future Plans
+
+- SMS parsing (optional)
+- Stock/Demat account tracking
+- Auto-suggest budget via ML
+
+---
+
+### 👩‍💻 Credits
+
+Built by **Lathiga M K**  
+Inspired by **Thirukkural** 751, 753, 754  
+MIT License will be applied on **July 6**
