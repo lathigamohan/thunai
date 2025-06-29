@@ -136,7 +136,8 @@ Finla is a sophisticated single-user personal finance web application built with
 
 ```
 Changelog:
-- June 29, 2025. Initial setup
+- June 29, 2025. Initial setup and full application development
+- June 29, 2025. Confirmed cross-platform compatibility - works seamlessly on both laptops and mobile devices
 ```
 
 ## User Preferences
