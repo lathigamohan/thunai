@@ -554,11 +554,12 @@ function generateColorPalette(count) {
 function showChartError() {
     const errorMessage = `
         <div class="text-center p-4">
-            <i class="fas fa-chart-bar text-muted fs-1 mb-3"></i>
-            <p class="text-muted">Unable to load chart data</p>
-            <button class="btn btn-outline-warning btn-sm" onclick="location.reload()">
-                <i class="fas fa-refresh me-1"></i>Retry
-            </button>
+            <i class="fas fa-chart-line gold-text fs-1 mb-3"></i>
+            <h6 class="gold-text mb-2">Start Your Financial Journey</h6>
+            <p class="text-muted mb-3">Add your first transaction to see beautiful spending insights and charts</p>
+            <a href="/add_transaction" class="btn btn-outline-warning btn-sm">
+                <i class="fas fa-plus me-1"></i>Add Transaction
+            </a>
         </div>
     `;
     

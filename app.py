@@ -124,7 +124,10 @@ def add_transaction():
     with open('data/banks.json', 'r') as f:
         banks = json.load(f)
     
-    return render_template('add_transaction.html', banks=banks)
+    # Get today's date for the form
+    today_date = datetime.now().strftime('%Y-%m-%d')
+    
+    return render_template('add_transaction.html', banks=banks, today_date=today_date)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_transactions():
@@ -139,7 +142,7 @@ def upload_transactions():
             flash('No file selected', 'error')
             return redirect(request.url)
         
-        if file and file.filename.endswith('.csv'):
+        if file and file.filename and str(file.filename).endswith('.csv'):
             try:
                 # Read uploaded CSV
                 content = file.read().decode('utf-8')

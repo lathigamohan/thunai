@@ -315,6 +315,118 @@ body {
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
+/* Enhanced Streak Display Styling */
+.streak-display, .karma-display {
+    position: relative;
+    padding: 10px;
+}
+
+.streak-display .fas, .karma-display .fas {
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Streak milestone animations and effects */
+.fas.fa-crown {
+    color: var(--gold);
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+    animation: crown-glow 3s ease-in-out infinite alternate;
+}
+
+.fas.fa-trophy {
+    color: var(--dark-gold);
+    filter: drop-shadow(0 0 8px rgba(218, 165, 32, 0.6));
+    animation: trophy-bounce 2s ease-in-out infinite alternate;
+}
+
+.fas.fa-medal {
+    color: var(--gold);
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+    animation: medal-shine 2.5s ease-in-out infinite alternate;
+}
+
+.fas.fa-fire {
+    color: #ff6b35;
+    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6));
+    animation: fire-flicker 1.5s ease-in-out infinite alternate;
+}
+
+.fas.fa-seedling {
+    color: #28a745;
+    filter: drop-shadow(0 0 4px rgba(40, 167, 69, 0.4));
+    animation: seedling-grow 2s ease-in-out infinite alternate;
+}
+
+@keyframes crown-glow {
+    0% { filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8)) brightness(1); }
+    100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 1)) brightness(1.2); }
+}
+
+@keyframes trophy-bounce {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-3px); }
+}
+
+@keyframes medal-shine {
+    0% { filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.4)) brightness(1); }
+    100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7)) brightness(1.1); }
+}
+
+@keyframes fire-flicker {
+    0% { filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6)) hue-rotate(0deg); }
+    100% { filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.8)) hue-rotate(10deg); }
+}
+
+@keyframes seedling-grow {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* Enhanced stat circle styling */
+.stat-circle {
+    background: linear-gradient(145deg, var(--dark-gray), var(--light-gray));
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 3px solid var(--gold);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.stat-circle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.stat-circle:hover::before {
+    opacity: 1;
+    animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: rotate(45deg) translateX(-100%); }
+    100% { transform: rotate(45deg) translateX(100%); }
+}
+
 /* Chart Containers */
 .chart-container {
     position: relative;
