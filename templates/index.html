@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <!-- Daily Quote Section -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body text-center">
+                <i class="fas fa-quote-left gold-text fs-3 mb-3"></i>
+                <blockquote class="blockquote mb-3">
+                    <p class="mb-2">{{ quote.text }}</p>
+                    {% if quote.tamil %}
+                        <p class="tamil-text gold-text">{{ quote.tamil }}</p>
+                    {% endif %}
+                </blockquote>
+                <footer class="blockquote-footer gold-text">
+                    {{ quote.author }}
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Stats and Streak -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body text-center">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-fire me-2"></i>Streak & Karma
+                </h5>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="stat-circle">
+                            <h3 class="gold-text">{{ user_stats.streak }}</h3>
+                            <small>Day Streak</small>
+                            {% if user_stats.streak >= 5 %}
+                                <div class="mt-2">
+                                    <i class="fas fa-trophy gold-text"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="stat-circle">
+                            <h3 class="gold-text">{{ user_stats.karma_points }}</h3>
+                            <small>Karma Points</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Balance -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body text-center">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-wallet me-2"></i>Total Balance
+                </h5>
+                <h2 class="gold-text">₹{{ "%.2f"|format(balances.total) }}</h2>
+                {% if alerts %}
+                    <div class="alert alert-warning mt-2">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Low balance alerts!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget Summary -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-pie me-2"></i>50/30/20 Budget This Month
+                </h5>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <h6 class="gold-text">Needs (50%)</h6>
+                        <div class="progress mb-2 gold-progress">
+                            <div class="progress-bar bg-warning" style="width: {{ (budget_summary.needs_spent / budget_summary.needs_budget * 100) if budget_summary.needs_budget > 0 else 0 }}%"></div>
+                        </div>
+                        <small>₹{{ "%.0f"|format(budget_summary.needs_spent) }} / ₹{{ "%.0f"|format(budget_summary.needs_budget) }}</small>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h6 class="gold-text">Wants (30%)</h6>
+                        <div class="progress mb-2 gold-progress">
+                            <div class="progress-bar bg-warning" style="width: {{ (budget_summary.wants_spent / budget_summary.wants_budget * 100) if budget_summary.wants_budget > 0 else 0 }}%"></div>
+                        </div>
+                        <small>₹{{ "%.0f"|format(budget_summary.wants_spent) }} / ₹{{ "%.0f"|format(budget_summary.wants_budget) }}</small>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h6 class="gold-text">Savings (20%)</h6>
+                        <div class="progress mb-2 gold-progress">
+                            <div class="progress-bar bg-warning" style="width: {{ (budget_summary.savings_actual / budget_summary.savings_target * 100) if budget_summary.savings_target > 0 else 0 }}%"></div>
+                        </div>
+                        <small>₹{{ "%.0f"|format(budget_summary.savings_actual) }} / ₹{{ "%.0f"|format(budget_summary.savings_target) }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Charts -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-bar me-2"></i>Weekly Spending
+                </h5>
+                <canvas id="weeklyChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-pie me-2"></i>Category Breakdown
+                </h5>
+                <canvas id="categoryChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-history me-2"></i>Recent Transactions
+                </h5>
+                {% if recent_transactions %}
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in recent_transactions %}
+                                <tr>
+                                    <td>{{ transaction.date }}</td>
+                                    <td>{{ transaction.description }}</td>
+                                    <td><span class="badge bg-secondary">{{ transaction.category }}</span></td>
+                                    <td class="gold-text">₹{{ "%.2f"|format(transaction.amount|float) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No transactions yet. <a href="{{ url_for('add_transaction') }}" class="gold-link">Add your first transaction</a>!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="col-12">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h5>
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('add_transaction') }}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-plus me-2"></i>Add Transaction
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('upload_transactions') }}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-upload me-2"></i>Upload CSV
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('analytics') }}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-chart-line me-2"></i>View Analytics
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('export_transactions') }}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-download me-2"></i>Export Data
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+    // Initialize home page charts
+    initializeHomeCharts();
+</script>
+{% endblock %}

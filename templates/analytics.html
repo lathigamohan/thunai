@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - Finla{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Analytics Header -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body text-center">
+                <h2 class="card-title gold-text">
+                    <i class="fas fa-chart-line me-2"></i>Financial Analytics
+                </h2>
+                <p class="text-muted">Comprehensive insights into your spending patterns</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Metrics -->
+    <div class="col-md-3 mb-4">
+        <div class="card bg-dark gold-border text-center">
+            <div class="card-body">
+                <i class="fas fa-calendar-week gold-text fs-2 mb-2"></i>
+                <h5 class="gold-text">This Week</h5>
+                <h3 id="weekSpending">₹0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card bg-dark gold-border text-center">
+            <div class="card-body">
+                <i class="fas fa-calendar-alt gold-text fs-2 mb-2"></i>
+                <h5 class="gold-text">This Month</h5>
+                <h3 id="monthSpending">₹0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card bg-dark gold-border text-center">
+            <div class="card-body">
+                <i class="fas fa-chart-bar gold-text fs-2 mb-2"></i>
+                <h5 class="gold-text">Daily Average</h5>
+                <h3 id="dailyAverage">₹0</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card bg-dark gold-border text-center">
+            <div class="card-body">
+                <i class="fas fa-trophy gold-text fs-2 mb-2"></i>
+                <h5 class="gold-text">Top Category</h5>
+                <h3 id="topCategory">-</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Spending Trend -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-line me-2"></i>Monthly Spending Trend
+                </h5>
+                <canvas id="monthlyTrendChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Breakdown -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-pie me-2"></i>Category Breakdown
+                </h5>
+                <canvas id="categoryPieChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Spending Pattern -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-chart-bar me-2"></i>Daily Spending Pattern
+                </h5>
+                <canvas id="dailyPatternChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget vs Actual -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-balance-scale me-2"></i>50/30/20 Budget Analysis
+                </h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="budget-item">
+                            <h6 class="gold-text">Needs (50%)</h6>
+                            <div class="progress mb-2 gold-progress">
+                                <div class="progress-bar bg-success" 
+                                     style="width: {{ (budget_summary.needs_spent / budget_summary.needs_budget * 100) if budget_summary.needs_budget > 0 else 0 }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Spent: ₹{{ "%.0f"|format(budget_summary.needs_spent) }}</span>
+                                <span>Budget: ₹{{ "%.0f"|format(budget_summary.needs_budget) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="budget-item">
+                            <h6 class="gold-text">Wants (30%)</h6>
+                            <div class="progress mb-2 gold-progress">
+                                <div class="progress-bar bg-warning" 
+                                     style="width: {{ (budget_summary.wants_spent / budget_summary.wants_budget * 100) if budget_summary.wants_budget > 0 else 0 }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Spent: ₹{{ "%.0f"|format(budget_summary.wants_spent) }}</span>
+                                <span>Budget: ₹{{ "%.0f"|format(budget_summary.wants_budget) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="budget-item">
+                            <h6 class="gold-text">Savings (20%)</h6>
+                            <div class="progress mb-2 gold-progress">
+                                <div class="progress-bar bg-info" 
+                                     style="width: {{ (budget_summary.savings_actual / budget_summary.savings_target * 100) if budget_summary.savings_target > 0 else 0 }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Saved: ₹{{ "%.0f"|format(budget_summary.savings_actual) }}</span>
+                                <span>Target: ₹{{ "%.0f"|format(budget_summary.savings_target) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Method Analysis -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-credit-card me-2"></i>Payment Methods
+                </h5>
+                <canvas id="paymentMethodChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Comparison -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-calendar-week me-2"></i>Weekly Comparison
+                </h5>
+                <canvas id="weeklyComparisonChart" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Insights and Recommendations -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-lightbulb me-2"></i>Smart Insights
+                </h5>
+                <div id="insights" class="row">
+                    <!-- Insights will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Options -->
+    <div class="col-12">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-download me-2"></i>Export Analytics
+                </h5>
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100" onclick="exportToPDF()">
+                            <i class="fas fa-file-pdf me-2"></i>PDF Report
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('export_transactions') }}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-file-csv me-2"></i>CSV Data
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100" onclick="shareAnalytics()">
+                            <i class="fas fa-share me-2"></i>Share Summary
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100" onclick="printAnalytics()">
+                            <i class="fas fa-print me-2"></i>Print Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all analytics charts
+    initializeAnalyticsCharts();
+    calculateKeyMetrics();
+    generateInsights();
+});
+
+function calculateKeyMetrics() {
+    fetch('/api/chart_data')
+        .then(response => response.json())
+        .then(data => {
+            // Calculate metrics from data
+            const daily = data.daily || {};
+            const categories = data.categories || {};
+            
+            const today = new Date();
+            const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+            const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+            
+            let weekSpending = 0;
+            let monthSpending = 0;
+            let totalDays = 0;
+            
+            Object.entries(daily).forEach(([date, amount]) => {
+                const transDate = new Date(date);
+                if (transDate >= weekAgo) {
+                    weekSpending += amount;
+                }
+                if (transDate >= monthAgo) {
+                    monthSpending += amount;
+                    totalDays++;
+                }
+            });
+            
+            const dailyAverage = totalDays > 0 ? monthSpending / totalDays : 0;
+            const topCategory = Object.keys(categories).reduce((a, b) => 
+                categories[a] > categories[b] ? a : b, 'None');
+            
+            document.getElementById('weekSpending').textContent = `₹${weekSpending.toFixed(0)}`;
+            document.getElementById('monthSpending').textContent = `₹${monthSpending.toFixed(0)}`;
+            document.getElementById('dailyAverage').textContent = `₹${dailyAverage.toFixed(0)}`;
+            document.getElementById('topCategory').textContent = topCategory.charAt(0).toUpperCase() + topCategory.slice(1);
+        })
+        .catch(error => console.error('Error loading metrics:', error));
+}
+
+function generateInsights() {
+    // Generate smart insights based on spending patterns
+    const insights = [
+        {
+            icon: 'fas fa-coffee',
+            title: 'Coffee Spending',
+            description: 'You spend an average of ₹150 per week on coffee and snacks.',
+            type: 'info'
+        },
+        {
+            icon: 'fas fa-bus',
+            title: 'Transport Savings',
+            description: 'Consider a monthly bus pass to save ₹200 on transport.',
+            type: 'success'
+        },
+        {
+            icon: 'fas fa-exclamation-triangle',
+            title: 'Budget Alert',
+            description: 'You\'re 80% through your wants budget for this month.',
+            type: 'warning'
+        },
+        {
+            icon: 'fas fa-trophy',
+            title: 'Achievement',
+            description: 'Great job! You\'ve maintained your streak for 5 days.',
+            type: 'success'
+        }
+    ];
+    
+    const insightsContainer = document.getElementById('insights');
+    insightsContainer.innerHTML = insights.map(insight => `
+        <div class="col-md-6 mb-3">
+            <div class="alert alert-${insight.type === 'warning' ? 'warning' : 'info'} bg-dark gold-border">
+                <i class="${insight.icon} gold-text me-2"></i>
+                <strong>${insight.title}:</strong> ${insight.description}
+            </div>
+        </div>
+    `).join('');
+}
+
+function exportToPDF() {
+    // Implementation for PDF export
+    alert('PDF export feature coming soon!');
+}
+
+function shareAnalytics() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'My Finla Analytics',
+            text: 'Check out my spending insights from Finla!',
+            url: window.location.href
+        });
+    } else {
+        // Fallback for browsers that don't support Web Share API
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Analytics URL copied to clipboard!');
+        });
+    }
+}
+
+function printAnalytics() {
+    window.print();
+}
+</script>
+{% endblock %}

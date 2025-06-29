@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Transactions - Finla{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h2 class="card-title gold-text text-center mb-4">
+                    <i class="fas fa-upload me-2"></i>Upload Transactions
+                </h2>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="file" class="form-label gold-text">Select CSV File</label>
+                        <input type="file" class="form-control bg-dark text-white gold-border" 
+                               id="file" name="file" accept=".csv" required>
+                        <div class="form-text text-muted">
+                            Upload a CSV file with your transaction data
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning btn-lg px-5">
+                            <i class="fas fa-upload me-2"></i>Upload Transactions
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-lg px-5 ms-3">
+                            <i class="fas fa-arrow-left me-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- CSV Format Guide -->
+        <div class="card bg-dark gold-border mt-4">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-info-circle me-2"></i>CSV Format Guide
+                </h5>
+                <p class="text-muted">Your CSV file should have the following columns:</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                                <th>Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>date</code></td>
+                                <td>Transaction date</td>
+                                <td>2025-06-29</td>
+                                <td><span class="badge bg-success">Yes</span></td>
+                            </tr>
+                            <tr>
+                                <td><code>amount</code></td>
+                                <td>Transaction amount</td>
+                                <td>150.50</td>
+                                <td><span class="badge bg-success">Yes</span></td>
+                            </tr>
+                            <tr>
+                                <td><code>description</code></td>
+                                <td>Transaction description</td>
+                                <td>Lunch at restaurant</td>
+                                <td><span class="badge bg-success">Yes</span></td>
+                            </tr>
+                            <tr>
+                                <td><code>payment_method</code></td>
+                                <td>Payment method used</td>
+                                <td>GPay, SBI Bank</td>
+                                <td><span class="badge bg-warning">Optional</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    <strong>Pro Tip:</strong> Categories will be automatically detected based on the description. 
+                    The system will also link UPI payments to their respective bank accounts based on your configuration.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sample CSV Download -->
+        <div class="card bg-dark gold-border mt-4">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-download me-2"></i>Sample CSV Template
+                </h5>
+                <p class="text-muted">Download a sample CSV template to get started:</p>
+                
+                <button class="btn btn-outline-warning" onclick="downloadSampleCSV()">
+                    <i class="fas fa-file-csv me-2"></i>Download Sample CSV
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function downloadSampleCSV() {
+    const csvContent = `date,amount,description,payment_method
+2025-06-29,150.50,Lunch at restaurant,GPay
+2025-06-29,25.00,Bus fare,Cash
+2025-06-28,75.00,Coffee and snacks,PhonePe
+2025-06-28,200.00,Grocery shopping,SBI Bank
+2025-06-27,50.00,Book purchase,Amazon Pay`;
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'finla_sample_transactions.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
+// File input validation
+document.getElementById('file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        if (!file.name.toLowerCase().endsWith('.csv')) {
+            alert('Please select a CSV file');
+            this.value = '';
+            return;
+        }
+        
+        // Preview file info
+        const fileSize = (file.size / 1024).toFixed(2);
+        console.log(`File selected: ${file.name} (${fileSize} KB)`);
+    }
+});
+</script>
+{% endblock %}

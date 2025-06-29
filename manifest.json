@@ -1,0 +1,120 @@
+{
+  "name": "Finla - Premium Finance Tracker",
+  "short_name": "Finla",
+  "description": "Premium personal finance tracker with black and gold theme. Track expenses, manage budgets, and achieve financial goals with Tamil and English motivational quotes.",
+  "version": "1.0.0",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#FFD700",
+  "background_color": "#000000",
+  "categories": ["finance", "productivity", "lifestyle"],
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9IiMwMDAwMDAiLz4KPGNpcmNsZSBjeD0iMzYiIGN5PSIzNiIgcj0iMjQiIGZpbGw9IiNGRkQ3MDAiLz4KPHRleHQgeD0iMzYiIHk9IjQyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMDAwMDAwIj7inLk8L3RleHQ+Cjwvc3ZnPgo=",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiMwMDAwMDAiLz4KPGNpcmNsZSBjeD0iNDgiIGN5PSI0OCIgcj0iMzIiIGZpbGw9IiNGRkQ3MDAiLz4KPHRleHQgeD0iNDgiIHk9IjU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzIiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjMDAwMDAwIj7inLk8L3RleHQ+Cjwvc3ZnPgo=",
+      "sizes": "96x96",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiByeD0iMjgiIGZpbGw9IiMwMDAwMDAiLz4KPGNpcmNsZSBjeD0iNjQiIGN5PSI2NCIgcj0iNDQiIGZpbGw9IiNGRkQ3MDAiLz4KPHN2ZyB4PSI0NCIgeT0iNDQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwMDAwIj4KPHA+PHBhdGggZD0iTTEyIDJDMTMuMSAyIDE0IDIuOSAxNCA0VjZIMTdDMTcuNTUgNiAxOCA2LjQ1IDE4IDdWMTlDMTggMTkuNTUgMTcuNTUgMjAgMTcgMjBIN0M2LjQ1IDIwIDYgMTkuNTUgNiAxOVY3QzYgNi40NSA2LjQ1IDYgNyA2SDEwVjRDMTAgMi45IDEwLjkgMiAxMiAyWk0xMCA4SDhWMTBIMTBWOFpNMTAgMTJIOFYxNEgxMFYxMlpNMTYgOEgxMlYxMEgxNlY4Wk0xNiAxMkgxMlYxNEgxNlYxMloiLz48L3A+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDAiIGZpbGw9IiMwMDAwMDAiLz4KPGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iNjgiIGZpbGw9IiNGRkQ3MDAiLz4KPHN2ZyB4PSI2NCIgeT0iNjQiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwMDAwIj4KPHA+PHBhdGggZD0iTTEyIDJDMTMuMSAyIDE0IDIuOSAxNCA0VjZIMTdDMTcuNTUgNiAxOCA2LjQ1IDE4IDdWMTlDMTggMTkuNTUgMTcuNTUgMjAgMTcgMjBIN0M2LjQ1IDIwIDYgMTkuNTUgNiAxOVY3QzYgNi40NSA2LjQ1IDYgNyA2SDEwVjRDMTAgMi45IDEwLjkgMiAxMiAyWk0xMCA4SDhWMTBIMTBWOFpNMTAgMTJIOFYxNEgxMFYxMlpNMTYgOEgxMlYxMEgxNlY4Wk0xNiAxMkgxMlYxNEgxNlYxMloiLz48L3A+Cjwvc3ZnPgo8L3N2Zz4K",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTA0IiBmaWxsPSIjMDAwMDAwIi8+CjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMTgwIiBmaWxsPSIjRkZENzAwIi8+CjxzdmcgeD0iMTc2IiB5PSIxNzYiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IiMwMDAwMDAiPgo8Zz4KPHA+PHBhdGggZD0iTTEyIDJDMTMuMSAyIDE0IDIuOSAxNCA0VjZIMTdDMTcuNTUgNiAxOCA2LjQ1IDE4IDdWMTlDMTggMTkuNTUgMTcuNTUgMjAgMTcgMjBIN0M2LjQ1IDIwIDYgMTkuNTUgNiAxOVY3QzYgNi40NSA2LjQ1IDYgNyA2SDEwVjRDMTAgMi45IDEwLjkgMiAxMiAyWk0xMCA4SDhWMTBIMTBWOFpNMTAgMTJIOFYxNEgxMFYxMlpNMTYgOEgxMlYxMEgxNlY4Wk0xNiAxMkgxMlYxNEgxNlYxMloiLz48L3A+CjwvZz4KPC9zdmc+Cjwvc3ZnPgo=",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHg9IjE2IiB5PSI2NCIgd2lkdGg9IjI4OCIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiMxYTFhMWEiIHN0cm9rZT0iI0ZGRDcwMCIvPgo8dGV4dCB4PSIzMiIgeT0iOTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkQ3MDAiPkZpbmxhIC0gUHJlbWl1bSBGaW5hbmNlPC90ZXh0Pgo8dGV4dCB4PSIzMiIgeT0iMTE2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNhZGI1YmQiPkRhaWx5IFFvdGUgJiBCYWxhbmNlIFRyYWNraW5nPC90ZXh0Pgo8cmVjdCB4PSIxNiIgeT0iMTY4IiB3aWR0aD0iMTM2IiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0iIzFhMWExYSIgc3Ryb2tlPSIjRkZENzAwIi8+Cjx0ZXh0IHg9IjMyIiB5PSIxOTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkQ3MDAiPlN0cmVhayAmIEthcm1hPC90ZXh0Pgo8dGV4dCB4PSI1NiIgeT0iMjE2IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjRkZENzAwIj41PC90ZXh0Pgo8cmVjdCB4PSIxNjgiIHk9IjE2OCIgd2lkdGg9IjEzNiIgaGVpZ2h0PSI4MCIgcng9IjgiIGZpbGw9IiMxYTFhMWEiIHN0cm9rZT0iI0ZGRDcwMCIvPgo8dGV4dCB4PSIxODQiIHk9IjE5NiIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0ZGRDcwMCI+VG90YWwgQmFsYW5jZTwvdGV4dD4KPHRleHQgeD0iMjA4IiB5PSIyMTYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkQ3MDAiPuKCuTEwLDAwMDwvdGV4dD4KPC9zdmc+",
+      "sizes": "320x568",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "Finla Home Screen"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSI3NjgiIHZpZXdCb3g9IjAgMCAxMDI0IDc2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEwMjQiIGhlaWdodD0iNzY4IiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHg9IjY0IiB5PSI5NiIgd2lkdGg9Ijg5NiIgaGVpZ2h0PSIxMjAiIHJ4PSIxMiIgZmlsbD0iIzFhMWExYSIgc3Ryb2tlPSIjRkZENzAwIi8+Cjx0ZXh0IHg9Ijk2IiB5PSIxNDQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNGRkQ3MDAiPkZpbmxhIC0gUHJlbWl1bSBGaW5hbmNlIFRyYWNrZXI8L3RleHQ+Cjx0ZXh0IHg9Ijk2IiB5PSIxNzYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iI2FkYjViZCI+RGVza3RvcCBEYXNoYm9hcmQgd2l0aCBBbmFseXRpY3MgJiBDaGFydHM8L3RleHQ+CjxyZWN0IHg9IjY0IiB5PSIyNTYiIHdpZHRoPSI0MzIiIGhlaWdodD0iMjAwIiByeD0iMTIiIGZpbGw9IiMxYTFhMWEiIHN0cm9rZT0iI0ZGRDcwMCIvPgo8dGV4dCB4PSI5NiIgeT0iMjg4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSIjRkZENzAwIj5XZWVrbHkgU3BlbmRpbmc8L3RleHQ+CjxyZWN0IHg9IjUyOCIgeT0iMjU2IiB3aWR0aD0iNDMyIiBoZWlnaHQ9IjIwMCIgcng9IjEyIiBmaWxsPSIjMWExYTFhIiBzdHJva2U9IiNGRkQ3MDAiLz4KPHR4dCB4PSI1NjAiIHk9IjI4OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0ZGRDcwMCI+Q2F0ZWdvcnkgQnJlYWtkb3duPC90ZXh0Pgo8L3N2Zz4K",
+      "sizes": "1024x768",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Finla Desktop Dashboard"
+    }
+  ],
+  "features": [
+    "expense-tracking",
+    "budget-management",
+    "goal-setting",
+    "data-visualization",
+    "gamification",
+    "multilingual-support"
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Add Transaction",
+      "short_name": "Add",
+      "description": "Quickly add a new transaction",
+      "url": "/add_transaction",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiNGRkQ3MDAiLz4KPHA+PHBhdGggZD0iTTQ4IDMyVjY0TTMyIDQ4SDY0IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjwvcD4KPC9zdmc+",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "short_name": "Charts",
+      "description": "View spending analytics",
+      "url": "/analytics",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiNGRkQ3MDAiLz4KPHA+PHBhdGggZD0iTTMyIDY0TDQ0IDUyTDU2IDU2TDY0IDQ0VjY0SDMyWiIgZmlsbD0iIzAwMDAwMCIvPgo8L3A+Cjwvc3ZnPg==",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Goals",
+      "short_name": "Goals",
+      "description": "Manage savings goals",
+      "url": "/goals",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMjAiIGZpbGw9IiNGRkQ3MDAiLz4KPGNpcmNsZSBjeD0iNDgiIGN5PSI0OCIgcj0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxjaXJjbGUgY3g9IjQ4IiBjeT0iNDgiIHI9IjQiIGZpbGw9IiMwMDAwMDAiLz4KPC9zdmc+",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
+}

@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}Bank Management - Finla{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Add Bank Form -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h3 class="card-title gold-text">
+                    <i class="fas fa-university me-2"></i>Add Bank Account
+                </h3>
+                
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="bank_name" class="form-label gold-text">Bank Name</label>
+                        <input type="text" class="form-control bg-dark text-white gold-border" 
+                               id="bank_name" name="bank_name" required
+                               placeholder="e.g., SBI, HDFC, ICICI">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="initial_balance" class="form-label gold-text">Initial Balance (₹)</label>
+                        <input type="number" class="form-control bg-dark text-white gold-border" 
+                               id="initial_balance" name="initial_balance" step="0.01" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="min_balance" class="form-label gold-text">Minimum Balance Alert (₹)</label>
+                        <input type="number" class="form-control bg-dark text-white gold-border" 
+                               id="min_balance" name="min_balance" step="0.01" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label gold-text">Linked UPI Apps</label>
+                        <div class="row">
+                            <div class="col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="upi_apps" value="GPay" id="gpay">
+                                    <label class="form-check-label" for="gpay">Google Pay</label>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="upi_apps" value="PhonePe" id="phonepe">
+                                    <label class="form-check-label" for="phonepe">PhonePe</label>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="upi_apps" value="Paytm" id="paytm">
+                                    <label class="form-check-label" for="paytm">Paytm</label>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="upi_apps" value="Amazon Pay" id="amazonpay">
+                                    <label class="form-check-label" for="amazonpay">Amazon Pay</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning w-100">
+                        <i class="fas fa-plus me-2"></i>Add Bank Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Accounts List -->
+    <div class="col-md-6 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h3 class="card-title gold-text">
+                    <i class="fas fa-list me-2"></i>Your Bank Accounts
+                </h3>
+                
+                {% if banks %}
+                    {% for bank_name, bank_info in banks.items() %}
+                    <div class="bank-card mb-3 p-3 rounded gold-border">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="gold-text mb-1">{{ bank_name }}</h5>
+                                <p class="mb-1">Current Balance: 
+                                    <span class="gold-text">₹{{ "%.2f"|format(balances[bank_name] if balances and bank_name in balances else bank_info.initial_balance) }}</span>
+                                </p>
+                                <p class="mb-1 text-muted">Min Balance: ₹{{ "%.2f"|format(bank_info.min_balance) }}</p>
+                                
+                                {% if bank_info.upi_apps %}
+                                <div class="mt-2">
+                                    <small class="text-muted">Linked UPI Apps:</small><br>
+                                    {% for upi_app in bank_info.upi_apps %}
+                                        <span class="badge bg-secondary me-1">{{ upi_app }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="bank-status">
+                                {% set current_balance = balances[bank_name] if balances and bank_name in balances else bank_info.initial_balance %}
+                                {% if current_balance <= bank_info.min_balance %}
+                                    <i class="fas fa-exclamation-triangle text-warning" title="Low Balance Alert"></i>
+                                {% else %}
+                                    <i class="fas fa-check-circle text-success" title="Balance OK"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Balance Progress Bar -->
+                        <div class="mt-3">
+                            {% set balance_percentage = (current_balance / (bank_info.min_balance * 2)) * 100 if bank_info.min_balance > 0 else 50 %}
+                            <div class="progress gold-progress">
+                                <div class="progress-bar {% if current_balance <= bank_info.min_balance %}bg-danger{% else %}bg-success{% endif %}" 
+                                     style="width: {{ balance_percentage if balance_percentage <= 100 else 100 }}%"></div>
+                            </div>
+                            <small class="text-muted">Balance relative to minimum threshold</small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted">
+                        <i class="fas fa-university fs-1 mb-3"></i>
+                        <p>No bank accounts added yet.</p>
+                        <p>Add your first bank account to get started!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Summary -->
+    <div class="col-12 mb-4">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h3 class="card-title gold-text">
+                    <i class="fas fa-chart-bar me-2"></i>Account Summary
+                </h3>
+                
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <h4 class="gold-text">{{ banks|length }}</h4>
+                        <p class="text-muted">Total Accounts</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h4 class="gold-text">₹{{ "%.2f"|format(balances.total if balances else 0) }}</h4>
+                        <p class="text-muted">Total Balance</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h4 class="{% if balances and balances.alerts %}text-warning{% else %}text-success{% endif %}">
+                            {{ balances.alerts|length if balances and balances.alerts else 0 }}
+                        </h4>
+                        <p class="text-muted">Low Balance Alerts</p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <h4 class="gold-text">
+                            {{ banks.values()|map(attribute='upi_apps')|map('length')|sum if banks else 0 }}
+                        </h4>
+                        <p class="text-muted">UPI Apps Linked</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPI Mapping Guide -->
+    <div class="col-12">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-info-circle me-2"></i>UPI Integration Guide
+                </h5>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="gold-text">How it works:</h6>
+                        <ul class="text-muted">
+                            <li>Link your UPI apps to bank accounts</li>
+                            <li>When you add transactions via UPI, the amount is automatically deducted from the linked bank</li>
+                            <li>Get alerts when bank balance drops below minimum threshold</li>
+                            <li>Track spending across all payment methods in one place</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="gold-text">Popular UPI Apps:</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <span class="badge bg-primary me-1">Google Pay</span><br>
+                                <span class="badge bg-success me-1">PhonePe</span><br>
+                            </div>
+                            <div class="col-6">
+                                <span class="badge bg-info me-1">Paytm</span><br>
+                                <span class="badge bg-warning me-1">Amazon Pay</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-suggest bank names
+const bankSuggestions = [
+    'State Bank of India (SBI)', 'HDFC Bank', 'ICICI Bank', 'Axis Bank', 
+    'Punjab National Bank (PNB)', 'Bank of Baroda', 'Canara Bank', 
+    'Union Bank of India', 'Indian Bank', 'Central Bank of India',
+    'Kotak Mahindra Bank', 'IndusInd Bank', 'Yes Bank', 'IDFC First Bank'
+];
+
+document.getElementById('bank_name').addEventListener('input', function() {
+    const input = this.value.toLowerCase();
+    const suggestions = bankSuggestions.filter(bank => 
+        bank.toLowerCase().includes(input)
+    ).slice(0, 5);
+    
+    // Remove existing datalist
+    let datalist = document.getElementById('bank-suggestions');
+    if (datalist) {
+        datalist.remove();
+    }
+    
+    if (suggestions.length > 0 && input.length > 1) {
+        datalist = document.createElement('datalist');
+        datalist.id = 'bank-suggestions';
+        
+        suggestions.forEach(suggestion => {
+            const option = document.createElement('option');
+            option.value = suggestion;
+            datalist.appendChild(option);
+        });
+        
+        document.body.appendChild(datalist);
+        this.setAttribute('list', 'bank-suggestions');
+    }
+});
+
+// Form validation
+document.querySelector('form').addEventListener('submit', function(e) {
+    const bankName = document.getElementById('bank_name').value.trim();
+    const initialBalance = parseFloat(document.getElementById('initial_balance').value);
+    const minBalance = parseFloat(document.getElementById('min_balance').value);
+    
+    if (!bankName) {
+        e.preventDefault();
+        alert('Please enter a bank name');
+        return;
+    }
+    
+    if (initialBalance < minBalance) {
+        if (!confirm('Initial balance is less than minimum balance. Are you sure you want to continue?')) {
+            e.preventDefault();
+            return;
+        }
+    }
+    
+    const checkedUPIs = document.querySelectorAll('input[name="upi_apps"]:checked');
+    if (checkedUPIs.length === 0) {
+        if (!confirm('No UPI apps selected. You can add them later. Continue?')) {
+            e.preventDefault();
+            return;
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,462 @@
+/* Finla - Premium Black and Gold Theme */
+
+:root {
+    --gold: #FFD700;
+    --dark-gold: #DAA520;
+    --black: #000000;
+    --dark-gray: #1a1a1a;
+    --light-gray: #2d2d2d;
+    --text-light: #f8f9fa;
+    --text-muted: #adb5bd;
+}
+
+/* Base Styles */
+body {
+    background-color: var(--black);
+    color: var(--text-light);
+    font-family: 'Inter', 'Noto Sans Tamil', sans-serif;
+    min-height: 100vh;
+}
+
+/* Gold Text */
+.gold-text {
+    color: var(--gold) !important;
+}
+
+.gold-link {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.gold-link:hover {
+    color: var(--dark-gold);
+    text-decoration: underline;
+}
+
+/* Gold Borders */
+.gold-border {
+    border: 1px solid var(--gold) !important;
+}
+
+.gold-border-top {
+    border-top: 2px solid var(--gold) !important;
+}
+
+.gold-border-bottom {
+    border-bottom: 2px solid var(--gold) !important;
+}
+
+/* Navigation */
+.navbar-dark {
+    background-color: var(--dark-gray) !important;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--gold) !important;
+}
+
+.navbar-toggler {
+    border-color: var(--gold);
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    min-height: calc(100vh - 160px);
+}
+
+/* Cards */
+.card {
+    background-color: var(--dark-gray) !important;
+    border: 1px solid var(--light-gray);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.15);
+}
+
+.card-body {
+    color: var(--text-light);
+}
+
+/* Forms */
+.form-control {
+    background-color: var(--dark-gray) !important;
+    border: 1px solid var(--light-gray);
+    color: var(--text-light) !important;
+}
+
+.form-control:focus {
+    background-color: var(--dark-gray) !important;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    color: var(--text-light) !important;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-select {
+    background-color: var(--dark-gray) !important;
+    border: 1px solid var(--light-gray);
+    color: var(--text-light) !important;
+}
+
+.form-select:focus {
+    background-color: var(--dark-gray) !important;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+}
+
+.form-label {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.form-check-input:checked {
+    background-color: var(--gold);
+    border-color: var(--gold);
+}
+
+.form-check-label {
+    color: var(--text-light);
+}
+
+/* Buttons */
+.btn-warning {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+    font-weight: 600;
+}
+
+.btn-warning:hover {
+    background-color: var(--dark-gold);
+    border-color: var(--dark-gold);
+    color: var(--black);
+}
+
+.btn-outline-warning {
+    color: var(--gold);
+    border-color: var(--gold);
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+/* Progress Bars */
+.gold-progress {
+    background-color: var(--light-gray);
+    height: 10px;
+}
+
+.gold-progress .progress-bar {
+    background-color: var(--gold);
+}
+
+/* Tables */
+.table-dark {
+    --bs-table-bg: var(--dark-gray);
+    --bs-table-striped-bg: var(--light-gray);
+}
+
+.table-dark th {
+    border-color: var(--light-gray);
+    color: var(--gold);
+}
+
+.table-dark td {
+    border-color: var(--light-gray);
+}
+
+/* Alerts */
+.alert {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--light-gray);
+    color: var(--text-light);
+}
+
+.alert-success {
+    border-color: #198754;
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.alert-danger {
+    border-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.alert-warning {
+    border-color: var(--gold);
+    background-color: rgba(255, 215, 0, 0.1);
+}
+
+.alert-info {
+    border-color: #0dcaf0;
+    background-color: rgba(13, 202, 240, 0.1);
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+}
+
+.badge.bg-secondary {
+    background-color: var(--light-gray) !important;
+}
+
+/* Quote Styling */
+.blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.tamil-text {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Stat Circles */
+.stat-circle {
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-circle h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-circle small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Bank Card */
+.bank-card {
+    background-color: var(--light-gray);
+    transition: background-color 0.3s ease;
+}
+
+.bank-card:hover {
+    background-color: rgba(255, 215, 0, 0.05);
+}
+
+/* Goal Card */
+.goal-card {
+    background-color: var(--light-gray);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.goal-card:hover::before {
+    opacity: 1;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-gray) !important;
+}
+
+/* Modal */
+.modal-content {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--gold);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--light-gray);
+}
+
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Chart Containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 1rem 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Quick Add Buttons */
+.quick-add {
+    transition: all 0.3s ease;
+}
+
+.quick-add:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 70px;
+        padding: 0 10px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .stat-circle h3 {
+        font-size: 2rem;
+    }
+    
+    .blockquote {
+        font-size: 1rem;
+    }
+    
+    .tamil-text {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .stat-circle h3 {
+        font-size: 1.8rem;
+    }
+    
+    .goal-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .navbar,
+    .footer,
+    .btn,
+    .quick-add {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+    }
+    
+    .gold-text {
+        color: #000 !important;
+        font-weight: bold;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gold);
+}
+
+/* Focus States for Accessibility */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --gold: #FFFF00;
+        --dark-gold: #CCCC00;
+        --text-light: #FFFFFF;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

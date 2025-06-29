@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Add Transaction - Finla{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card bg-dark gold-border">
+            <div class="card-body">
+                <h2 class="card-title gold-text text-center mb-4">
+                    <i class="fas fa-plus-circle me-2"></i>Add New Transaction
+                </h2>
+                
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="amount" class="form-label gold-text">Amount (₹)</label>
+                            <input type="number" class="form-control bg-dark text-white gold-border" 
+                                   id="amount" name="amount" step="0.01" required>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="date" class="form-label gold-text">Date</label>
+                            <input type="date" class="form-control bg-dark text-white gold-border" 
+                                   id="date" name="date" value="{{ moment().format('YYYY-MM-DD') }}">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label gold-text">Description</label>
+                        <input type="text" class="form-control bg-dark text-white gold-border" 
+                               id="description" name="description" required 
+                               placeholder="E.g., Lunch at restaurant, Bus fare, etc.">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label gold-text">Payment Method</label>
+                        <select class="form-select bg-dark text-white gold-border" 
+                                id="payment_method" name="payment_method" required>
+                            <option value="">Select payment method</option>
+                            {% for bank_name, bank_info in banks.items() %}
+                                <option value="{{ bank_name }}">{{ bank_name }} (Bank)</option>
+                                {% for upi_app in bank_info.upi_apps %}
+                                    <option value="{{ upi_app }}">{{ upi_app }} (UPI)</option>
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label gold-text">Category Preview</label>
+                        <div id="category_preview" class="p-2 rounded bg-secondary text-center">
+                            <i class="fas fa-magic me-2"></i>
+                            Category will be auto-detected based on description
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning btn-lg px-5">
+                            <i class="fas fa-save me-2"></i>Add Transaction
+                        </button>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary btn-lg px-5 ms-3">
+                            <i class="fas fa-arrow-left me-2"></i>Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Quick Add Buttons -->
+        <div class="card bg-dark gold-border mt-4">
+            <div class="card-body">
+                <h5 class="card-title gold-text">
+                    <i class="fas fa-bolt me-2"></i>Quick Add
+                </h5>
+                <div class="row">
+                    <div class="col-6 col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100 quick-add" 
+                                data-description="Tea/Coffee" data-amount="20">
+                            <i class="fas fa-coffee me-1"></i>Tea ₹20
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100 quick-add" 
+                                data-description="Bus fare" data-amount="25">
+                            <i class="fas fa-bus me-1"></i>Bus ₹25
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100 quick-add" 
+                                data-description="Lunch" data-amount="100">
+                            <i class="fas fa-utensils me-1"></i>Lunch ₹100
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2">
+                        <button class="btn btn-outline-warning w-100 quick-add" 
+                                data-description="Snacks" data-amount="50">
+                            <i class="fas fa-cookie-bite me-1"></i>Snacks ₹50
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const descriptionInput = document.getElementById('description');
+    const categoryPreview = document.getElementById('category_preview');
+    const quickAddButtons = document.querySelectorAll('.quick-add');
+    
+    // Auto-categorize based on description
+    const categories = {
+        'food': ['lunch', 'dinner', 'breakfast', 'restaurant', 'hotel', 'biryani', 'pizza', 'burger'],
+        'transport': ['bus', 'auto', 'taxi', 'uber', 'ola', 'metro', 'train', 'fuel', 'petrol'],
+        'education': ['book', 'course', 'fee', 'tuition', 'study', 'exam', 'college', 'school'],
+        'snacks': ['tea', 'coffee', 'snacks', 'juice', 'water', 'biscuit', 'chips'],
+        'others': []
+    };
+    
+    const categoryIcons = {
+        'food': 'fas fa-utensils',
+        'transport': 'fas fa-bus',
+        'education': 'fas fa-graduation-cap',
+        'snacks': 'fas fa-cookie-bite',
+        'others': 'fas fa-question-circle'
+    };
+    
+    function predictCategory(description) {
+        const desc = description.toLowerCase();
+        for (const [category, keywords] of Object.entries(categories)) {
+            if (keywords.some(keyword => desc.includes(keyword))) {
+                return category;
+            }
+        }
+        return 'others';
+    }
+    
+    descriptionInput.addEventListener('input', function() {
+        const description = this.value;
+        if (description.length > 2) {
+            const predictedCategory = predictCategory(description);
+            const icon = categoryIcons[predictedCategory];
+            categoryPreview.innerHTML = `<i class="${icon} me-2"></i>${predictedCategory.charAt(0).toUpperCase() + predictedCategory.slice(1)}`;
+            categoryPreview.className = 'p-2 rounded bg-warning text-dark text-center';
+        } else {
+            categoryPreview.innerHTML = '<i class="fas fa-magic me-2"></i>Category will be auto-detected based on description';
+            categoryPreview.className = 'p-2 rounded bg-secondary text-center';
+        }
+    });
+    
+    // Quick add functionality
+    quickAddButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const description = this.dataset.description;
+            const amount = this.dataset.amount;
+            
+            document.getElementById('description').value = description;
+            document.getElementById('amount').value = amount;
+            
+            // Trigger category prediction
+            descriptionInput.dispatchEvent(new Event('input'));
+        });
+    });
+    
+    // Set today's date by default
+    document.getElementById('date').valueAsDate = new Date();
+});
+</script>
+{% endblock %}
