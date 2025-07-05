@@ -1,70 +1,110 @@
-<<<<<<< HEAD
-# 🏆 Finla - Premium Personal Finance Tracker
+# 🌟 Thunai – Personal Finance Companion
 
-> A sophisticated black and gold themed personal finance application built with Flask, featuring Tamil and English motivational quotes, comprehensive expense tracking, and PWA capabilities.
+> *Thunai* (Tamil: துணை) means "Companion"—and that's exactly what this app aims to be for your financial journey. Built with Flask, designed with intention, and powered by meaningful features, *Thunai* brings clarity, control, and calm to personal finance management.
 
-![Finla Logo](https://img.shields.io/badge/Finla-Premium%20Finance%20Tracker-FFD700?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNGRkQ3MDAiLz4KPHN2ZyB4PSI2IiB5PSI2IiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwMDAwMCI+CjxwYXRoIGQ9Ik0xMiAyQzEzLjEgMiAxNCAyLjkgMTQgNFY2SDE3QzE3LjU1IDYgMTggNi40NSAxOCA3VjE5QzE4IDE5LjU1IDE3LjU1IDIwIDE3IDIwSDdDNi40NSAyMCA2IDE5LjU1IDYgMTlWN0M2IDYuNDUgNi40NSA2IDcgNkgxMFY0QzEwIDIuOSAxMC45IDIgMTIgMloiLz4KPC9zdmc+Cjwvc3ZnPgo=)
+---
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-2.0+-green?style=flat-square)](https://flask.palletsprojects.com)
-[![PWA](https://img.shields.io/badge/PWA-Ready-purple?style=flat-square)](https://web.dev/progressive-web-apps)
-[![License](https://img.shields.io/badge/License-MIT-gold?style=flat-square)](LICENSE)
+## 📌 Overview
 
-## ✨ Features
+**Thunai** is a bilingual (Tamil & English) premium personal finance tracker with:
 
-### 🎯 Core Functionality
-- **📊 Expense Tracking**: Manual entry and CSV bulk upload
-- **🏦 Bank Management**: Multiple bank accounts with UPI integration
-- **💰 Balance Monitoring**: Real-time balance calculation with low-balance alerts
-- **📈 50/30/20 Budgeting**: Automatic needs/wants/savings categorization
-- **🎯 Savings Goals**: Track progress towards financial objectives
-- **📱 PWA Support**: Install as mobile/desktop app
+* Multi-account support
+* Smart budgeting tools (like 50/30/20 rule)
+* Expense tracking (manual & CSV)
+* AI-based categorization
+* Gamification & motivational quotes
+  All wrapped in a sleek **black-and-gold interface**, crafted for students, minimalists, and modern users alike.
 
-### 🎮 Gamification
-- **🔥 Streak Tracking**: Maintain daily transaction logging streaks
-- **⭐ Karma Points**: Earn points for mindful spending habits
-- **🏆 Achievement System**: Unlock badges for financial milestones
-- **📊 Level Progression**: Advance through financial responsibility levels
-- **❄️ Streak Freeze**: Protection tokens for maintaining streaks
+---
 
-### 🎨 Premium Design
-- **🖤 Black & Gold Theme**: Luxurious dark mode interface
-- **📱 Mobile-First**: Responsive design for all devices
-- **🌏 Tamil & English**: Bilingual support with cultural quotes
-- **📊 Interactive Charts**: Beautiful Chart.js visualizations
-- **💎 Premium UI**: Sophisticated styling with gold accents
+## ✨ Key Features
+
+### 💼 Core Functionalities
+
+* **Expense Tracking** – Manual entry or bulk CSV upload
+* **Bank & UPI Account Management** – Support for multiple accounts
+* **Live Balance Monitoring** – With low-balance smart alerts
+* **Budgeting System** – Automatic classification into needs/wants/savings
+* **Goal Setting** – Visual trackers for financial goals
+
+### 🎮 Gamification Elements
+
+* **Daily Streaks** – Track consistency in finance journaling
+* **Karma Points** – Earn points for wise financial habits
+* **Achievement Badges** – For key milestones (like "First ₹1000 Saved!")
+* **Level System** – Progress through stages of financial awareness
+* **Streak Freeze Tokens** – To maintain momentum during off days
+
+### 🎨 UI & UX
+
+* **Dark Premium Theme** – Black-and-gold with refined UI polish
+* **Mobile-First** – Fully responsive for all screen sizes
+* **Chart Visualization** – Track trends with interactive graphs
+* **Tamil & English Quotes** – Daily motivation from Thirukkural & legends
 
 ### 🧠 Smart Features
-- **🤖 Auto-Categorization**: AI-powered expense classification
-- **💬 Daily Quotes**: Thirukkural, Warren Buffett, and AI wisdom
-- **📊 Financial Insights**: Weekly/monthly spending analysis
-- **⚠️ Smart Alerts**: Balance warnings and budget notifications
-- **📈 Trend Analysis**: Spending pattern recognition
 
-## 🚀 Quick Start
+* **Auto Categorization** – ML-based tag predictions for transactions
+* **Quote of the Day** – Wisdom from Warren Buffett to ancient Tamil poets
+* **Spending Analytics** – Monthly reports & heatmaps
+* **PWA Ready** – Install on mobile like an app
 
-### Prerequisites
-- Python 3.8 or higher
-- Modern web browser
-- Internet connection (for CDN resources)
+---
 
-### Installation
+## 🚀 Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/finla.git
-   cd finla
-   ```
+### 🛠 Prerequisites
 
-2. **Install dependencies**
-   ```bash
-   pip install flask werkzeug
-   ```
+* Python 3.8+
+* Flask (included in dependencies)
 
-3. **Set environment variables** (optional)
-   ```bash
-   export SESSION_SECRET="your-secret-key-here"
-   
-=======
-# thunai
->>>>>>> c053a58d59415f2c564cc594571e5fd3d50235e8
+### ⚙️ Setup Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/lathigamohan/thunai.git
+cd thunai
+
+# 2. Install dependencies
+pip install -r requirements.txt  # or use poetry if using pyproject.toml
+
+# 3. Start the Flask server
+python main.py
+```
+
+---
+
+## 🧪 Development Notes
+
+* Templates use **Jinja2**
+* Backend is structured modularly via `utils/`
+* Assets, quotes, streak logic are extendable
+* Runs in debug mode by default for local testing
+
+---
+
+## 🌐 Deployment
+
+This app is deployable on:
+
+* **Replit** (student/dev mode)
+* **Render.com** (production-ready, free tier)
+* **Railway.app** (fast GitHub-integrated cloud deploy)
+
+You’ll find deployment configurations like `.replit`, `manifest.json`, and `pyproject.toml` included for smooth hosting.
+
+---
+
+## 📄 License
+
+MIT License – Free to use, modify, and enhance!
+
+---
+
+## 🙌 Acknowledgements
+
+* Thirukkural for daily cultural inspiration
+* Warren Buffett for financial wisdom
+* Flask, Chart.js, and open-source communities 💛
+
+
