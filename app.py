@@ -47,6 +47,53 @@ def init_data_files():
                 'total_transactions': 0,
                 'achievements': []
             }, f)
+    
+    # Initialize income.json for monthly income and 50/30/20 budgeting
+    if not os.path.exists('data/income.json'):
+        with open('data/income.json', 'w') as f:
+            json.dump({
+                'monthly_income': 0,
+                'needs_budget': 0,  # 50% of income
+                'wants_budget': 0,  # 30% of income
+                'savings_budget': 0,  # 20% of income
+                'last_updated': '',
+                'is_setup': False
+            }, f)
+
+def get_income_data():
+    """Get monthly income and budget data"""
+    try:
+        with open('data/income.json', 'r') as f:
+            return json.load(f)
+    except Exception as e:
+        logging.error(f"Error reading income data: {e}")
+        return {
+            'monthly_income': 0,
+            'needs_budget': 0,
+            'wants_budget': 0,
+            'savings_budget': 0,
+            'last_updated': '',
+            'is_setup': False
+        }
+
+def update_income_data(monthly_income):
+    """Update monthly income and calculate 50/30/20 budget"""
+    income_data = {
+        'monthly_income': float(monthly_income),
+        'needs_budget': float(monthly_income) * 0.5,  # 50%
+        'wants_budget': float(monthly_income) * 0.3,  # 30%
+        'savings_budget': float(monthly_income) * 0.2,  # 20%
+        'last_updated': datetime.now().strftime('%Y-%m-%d'),
+        'is_setup': True
+    }
+    
+    try:
+        with open('data/income.json', 'w') as f:
+            json.dump(income_data, f, indent=2)
+        return True
+    except Exception as e:
+        logging.error(f"Error updating income data: {e}")
+        return False
 
 init_data_files()
 
@@ -75,7 +122,8 @@ def index():
                          alerts=alerts,
                          budget_summary=budget_summary,
                          user_stats=user_stats,
-                         recent_transactions=recent_transactions)
+                         recent_transactions=recent_transactions,
+                         income_data=get_income_data())
 
 @app.route('/add_transaction', methods=['GET', 'POST'])
 def add_transaction():
@@ -325,6 +373,31 @@ def export_transactions():
         logging.error(f"Error exporting transactions: {e}")
         flash('Error exporting transactions', 'error')
         return redirect(url_for('index'))
+
+@app.route('/income', methods=['GET', 'POST'])
+def manage_income():
+    """Manage monthly income and 50/30/20 budget setup"""
+    if request.method == 'POST':
+        try:
+            monthly_income = float(request.form['monthly_income'])
+            if monthly_income <= 0:
+                flash('Please enter a valid monthly income amount', 'error')
+                return redirect(url_for('manage_income'))
+            
+            if update_income_data(monthly_income):
+                flash(f'Monthly income set to ₹{monthly_income:,.2f}. Your 50/30/20 budget has been calculated!', 'success')
+                return redirect(url_for('index'))
+            else:
+                flash('Error updating income data. Please try again.', 'error')
+                
+        except ValueError:
+            flash('Please enter a valid numeric amount', 'error')
+        except Exception as e:
+            logging.error(f"Error setting income: {e}")
+            flash('Error updating income. Please try again.', 'error')
+    
+    income_data = get_income_data()
+    return render_template('income.html', income_data=income_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
