@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏆 Finla - Premium Personal Finance Tracker
 
 > A sophisticated black and gold themed personal finance application built with Flask, featuring Tamil and English motivational quotes, comprehensive expense tracking, and PWA capabilities.
@@ -64,3 +65,6 @@
    ```bash
    export SESSION_SECRET="your-secret-key-here"
    
+=======
+# thunai
+>>>>>>> c053a58d59415f2c564cc594571e5fd3d50235e8
